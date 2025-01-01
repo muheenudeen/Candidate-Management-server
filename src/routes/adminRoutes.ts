@@ -14,7 +14,6 @@ const validator=createValidator({passError:true})
 adminRouter.post(`/signup`,validator.body(adminRegitserValidation),trycatch(signup));
 adminRouter.post(`/login`,validator.body(adminLoginValidation),trycatch(login));
 adminRouter.post(`/candidate`,checkAuth,checkAdmin,validator.body(candidateCreateValidation),trycatch(createCandidate));
-adminRouter.post(`/candidate`,checkAuth,checkAdmin,validator.body(candidateCreateValidation),trycatch(createCandidate));
 adminRouter.get(`/candidate`,checkAuth,checkAdmin,trycatch(getAllCandidates))
 adminRouter.delete(`/candidate/:id`,checkAuth,checkAdmin,trycatch(deleteCandidate))
 

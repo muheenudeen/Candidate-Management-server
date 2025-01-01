@@ -24,17 +24,37 @@ res.status(201).json({
 
 
 
+
 export const getAllCandidates = async (req: Request, res: Response) => {
-   const candidates = await Candidate.find();
-   if (candidates.length === 0) {
-     throw new AppError("No candidates found", 404);
-   }
-   res.status(200).json({
-     success: true,
-     message: "Candidates retrieved successfully",
-     data: candidates,
-   });
-};
+  
+    const { page = 1, limit = 10 } = req.query; 
+    const pageNumber = parseInt(page as string, 5);
+    const limitNumber = parseInt(limit as string, 5);
+    const skip = (pageNumber - 1) * limitNumber;
+
+    const candidates = await Candidate.find()
+      .skip(skip)
+      .limit(limitNumber);
+
+    if (candidates.length === 0) {
+      throw new AppError("No candidates found", 404);
+    }
+
+    const totalCandidates = await Candidate.countDocuments();
+
+    res.status(200).json({
+      success: true,
+      message: "Candidates retrieved successfully",
+      data: candidates,
+      pagination: {
+        currentPage: pageNumber,
+        totalCandidates,
+        pageSize: candidates.length,
+      },
+    });
+ 
+}
+
 
 
 export const deleteCandidate = async (req: Request, res: Response) => {
