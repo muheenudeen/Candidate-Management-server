@@ -30,29 +30,24 @@ function sanitizeFile(
   cb: FileFilterCallback
 ): void {
   
-  // Define the allowed extensions
   const fileExts = [".png", ".jpg", ".jpeg", ".gif"];
 
-  // Check allowed extensions
   const isAllowedExt = fileExts.includes(
     path.extname(file.originalname.toLowerCase())
   );
 
-  // Mime type must be an image
   const isAllowedMimeType = file.mimetype.startsWith("image/");
 
   if (isAllowedExt && isAllowedMimeType) {
-    return cb(null, true); // No errors
+    return cb(null, true);
   } else {
-    // Pass error message to callback
     cb(new Error("File type not allowed!"));
   }
 }
 
-// Middleware for image upload
 const uploadImage = multer({
 
-  storage: s3Storage, // Replace this with your actual storage configuration
+  storage: s3Storage, 
   fileFilter: (
     req: Request,
     file: Express.Multer.File,
@@ -61,7 +56,7 @@ const uploadImage = multer({
     sanitizeFile(file, callback);
   },
   limits: {
-    fileSize: 1024 * 1024 * 2, // 2MB file size limit
+    fileSize: 1024 * 1024 * 2, 
   },
 });
 
