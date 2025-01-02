@@ -10,9 +10,7 @@ export const candidateRouter=express.Router()
 
 const validator=createValidator({passError:true})
 
-
 candidateRouter.post(`/login`,validator.body(candidateLoginValidation),trycatch(candidateLogin))
 candidateRouter.get(`/:id`,trycatch(getCandidate))
 candidateRouter.post('/upload/profile/:id',uploadImage.single('image'),trycatch(uploadProfileImage))
 candidateRouter.post('/upload/resume/:id',uploadImage.single('file'),trycatch(uploadResume))
-

@@ -17,5 +17,4 @@ adminRouter.post(`/candidate`,checkAuth,checkAdmin,validator.body(candidateCreat
 adminRouter.get(`/candidate`,checkAuth,checkAdmin,trycatch(getAllCandidates))
 adminRouter.delete(`/candidate/:id`,checkAuth,checkAdmin,trycatch(deleteCandidate))
 
-
 export default adminRouter;
