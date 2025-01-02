@@ -55,5 +55,5 @@ export const uploadResume=async(req:Request,res:Response)=>{
         await s3Client.send(new DeleteObjectCommand(deleteParams))}}
     candidate.resume = resume;
     await candidate.save();
-    res.status(200).json({ message: 'Profile image uploaded successfully', data: candidate});
+    res.status(200).json({ message: 'Resume uploaded successfully', data: candidate});
 }

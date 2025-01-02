@@ -31,7 +31,6 @@ const candidateSchema=new mongoose.Schema({
       
         type:String
     },
-
     createdAt:{
         type:Date
     },

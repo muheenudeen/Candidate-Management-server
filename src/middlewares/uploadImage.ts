@@ -30,13 +30,13 @@ function sanitizeFile(
   cb: FileFilterCallback
 ): void {
   
-  const fileExts = [".png", ".jpg", ".jpeg", ".gif"];
+  const fileExts = [".png", ".jpg", ".jpeg", ".gif",'.pdf'];
 
   const isAllowedExt = fileExts.includes(
     path.extname(file.originalname.toLowerCase())
   );
 
-  const isAllowedMimeType = file.mimetype.startsWith("image/");
+  const isAllowedMimeType = file.mimetype.startsWith("image/")|| file.mimetype === "application/pdf";
 
   if (isAllowedExt && isAllowedMimeType) {
     return cb(null, true);

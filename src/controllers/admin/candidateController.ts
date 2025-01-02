@@ -13,7 +13,7 @@ export const createCandidate=async(req:Request,res:Response)=>{
 
 
 export const getAllCandidates = async (req: Request, res: Response) => {
-    const { page = 1, limit = 10 } = req.query; 
+    const { page = 1, limit = 5 } = req.query; 
     const pageNumber = parseInt(page as string, 5);
     const limitNumber = parseInt(limit as string, 5);
     const skip = (pageNumber - 1) * limitNumber;
